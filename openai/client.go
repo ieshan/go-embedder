@@ -49,7 +49,6 @@ type Client struct {
 	maxBatchSize   int
 	maxRetries     int
 	retryBaseDelay time.Duration
-	concurrency    int
 	limiter        *rate.Limiter
 	sem            *semaphore.Weighted
 }
@@ -112,7 +111,6 @@ func New(opts Options) (*Client, error) {
 		maxBatchSize:   opts.MaxBatchSize,
 		maxRetries:     opts.MaxRetries,
 		retryBaseDelay: opts.RetryBaseDelay,
-		concurrency:    opts.Concurrency,
 		limiter:        limiter,
 		sem:            sem,
 	}, nil
