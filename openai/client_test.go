@@ -902,6 +902,20 @@ func TestEmbedBatchPartial_VectorCountMismatch_SetsPerTextErrors(t *testing.T) {
 	}
 }
 
+func TestClient_Dim(t *testing.T) {
+	c, err := openai.New(openai.Options{
+		BaseURL:    "http://localhost",
+		Model:      "test",
+		Dimensions: 768,
+	})
+	if err != nil {
+		t.Fatalf("New: %v", err)
+	}
+	if got := c.Dim(); got != 768 {
+		t.Errorf("Dim() = %d, want 768", got)
+	}
+}
+
 func TestClient_EmbedBatch_RateLimiting(t *testing.T) {
 	var mu sync.Mutex
 	requestTimes := make([]time.Time, 0)

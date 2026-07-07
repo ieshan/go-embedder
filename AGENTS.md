@@ -16,8 +16,10 @@ go-embedder is a Go library for converting text into float32 embedding vectors u
 ```
 .
 ├── embedder.go          # Package embedder: the Embedder interface (public API contract)
+├── fake.go              # FakeEmbedder for testing (deterministic, no external calls)
+├── fake_test.go         # FakeEmbedder tests
 ├── openai/              # OpenAI-compatible client implementation
-│   ├── client.go        # Client struct, New(), Embed/EmbedBatch/EmbedBatchPartial
+│   ├── client.go        # Client struct, New(), Embed/EmbedBatch/EmbedBatchPartial/Dim
 │   ├── request.go       # HTTP request/response types, CallAPI
 │   ├── retry.go         # CallWithRetry, transient error classification
 │   ├── errors.go        # Sentinel errors: ErrRateLimited, ErrAPIError
@@ -122,7 +124,7 @@ func (c *Client) embed(t string) []float32 {
 ## Do Not Modify
 
 - `go.sum` — only change via `go mod tidy` or `go get`, never edit by hand.
-- `embedder.go` interface contract — the `Embedder` interface is the public API; changing method signatures breaks all consumers.
+- `embedder.go` interface contract — the `Embedder` interface (Embed, EmbedBatch, EmbedBatchPartial, Dim) is the public API; changing method signatures breaks all consumers.
 - Existing tests — do not delete or weaken tests without explicit direction.
 - `GO_BEST_PRACTICES.md` — project-agnostic reference, not project-specific to edit.
 

@@ -122,6 +122,9 @@ func (c *Client) HTTPClient() *http.Client {
 	return c.httpClient
 }
 
+// Dim returns the configured embedding dimensionality.
+func (c *Client) Dim() int { return c.dimensions }
+
 // Embed embeds a single text string and returns its float32 vector.
 // It respects ctx cancellation at the rate-limiter wait and HTTP request.
 func (c *Client) Embed(ctx context.Context, text string) ([]float32, error) {

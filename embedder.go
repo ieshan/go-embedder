@@ -18,4 +18,7 @@ type Embedder interface {
 	// Callers should also inspect ctx.Err() to distinguish caller
 	// cancellation from per-sub-batch failure.
 	EmbedBatchPartial(ctx context.Context, texts []string) ([][]float32, []error)
+
+	// Dim returns the dimensionality of the embeddings.
+	Dim() int
 }

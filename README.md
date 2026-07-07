@@ -115,6 +115,21 @@ The `openai.Client` satisfies this interface:
 var _ embedder.Embedder = (*openai.Client)(nil)
 ```
 
+The interface also includes a `Dim() int` method for querying embedding dimensionality.
+
+## Fake Embedder
+
+For testing, `embedder.FakeEmbedder` provides deterministic embeddings without external calls:
+
+```go
+import "github.com/ieshan/go-embedder"
+
+e := embedder.NewFakeEmbedder(1536)
+vec, err := e.Embed(context.Background(), "hello")
+```
+
+It satisfies `embedder.Embedder` and is safe for concurrent use.
+
 ## Configuration Reference
 
 | Field | Type | Default | Description |
